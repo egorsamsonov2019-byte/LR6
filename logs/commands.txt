@@ -1,0 +1,41 @@
+git clone https://github.com/egorsamsonov2019-byte/LR6.git LR6-result
+cd LR6-result
+git --version 
+git config --local user.name 4515\ Самсонов\ Е.А. 
+git config --local user.email egor.samsonov2019@icloud.com 
+git switch master 
+git remote add upstream https://github.com/Kurtyanik/LR6.git 
+git fetch upstream 
+git pull --ff-only origin master 
+git branch branch1 upstream/branch1 
+git branch -a 
+git --no-pager log --oneline master 
+git --no-pager log --oneline branch1 
+git --no-pager show master 
+git --no-pager show branch1 
+git --no-pager diff master branch1 -- mergefile.txt 
+git merge branch1 
+git status --short 
+cat mergefile.txt 
+bash -c $'cat > mergefile.txt <<"TEXT"\nФайл\nзаполнен\nочень\nважной\nинформацией\n\nДополнение из branch1:\nИнформация этой ветки противоречила ветке master.\nКонфликт разрешён, содержание обеих веток учтено.\nTEXT' 
+git add mergefile.txt 
+git commit -m Разрешён\ конфликт:\ branch1\ объединена\ с\ master 
+git branch -d branch1 
+bash -c printf\ \"%s\\n\"\ \"#\ Заметки\ по\ Git\"\ \"\"\ \"Коммит\ сохраняет\ состояние\ проиндексированных\ файлов.\"\ \>\ NOTES.md 
+git add NOTES.md 
+git commit -m Добавлены\ заметки\ о\ коммитах 
+bash -c printf\ \"%s\\n\"\ \"\"\ \"Ветка\ позволяет\ вести\ отдельную\ линию\ разработки.\"\ \>\>\ NOTES.md 
+git add NOTES.md 
+git commit -m Добавлено\ объяснение\ веток 
+bash -c printf\ \"%s\\n\"\ \"\"\ \"Временная\ строка\ для\ демонстрации\ отката.\"\ \>\>\ NOTES.md 
+git add NOTES.md 
+git commit -m Добавлена\ временная\ строка\ для\ отката 
+git revert --no-edit HEAD 
+git --no-pager log --graph --oneline -9 
+cat NOTES.md 
+git switch -c report 
+git add README.md 
+git commit -m Начат\ отчёт:\ цель\ и\ подготовка\ репозитория 
+git add README.md screenshots 
+git commit -m Описаны\ конфликт\,\ слияние\ и\ откат\;\ добавлены\ снимки 
+bash -c git\ log\ --all\ --date=short\ --pretty=format:\"%h\ \|\ %ad\ \|\ %an\ \|\ %s\"\ \>\ logs/history.txt 
